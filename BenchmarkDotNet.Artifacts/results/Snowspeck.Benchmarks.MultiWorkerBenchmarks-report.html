@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Snowspeck.Benchmarks.MultiWorkerBenchmarks-20250826-225633</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.2, Linux Linux Mint 22.1 (Xia)
+AMD Ryzen 7 7800X3D 5.05GHz, 1 CPU, 16 logical and 8 physical cores
+.NET SDK 8.0.413
+  [Host]     : .NET 8.0.19 (8.0.1925.36514), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
+  DefaultJob : .NET 8.0.19 (8.0.1925.36514), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
+</code></pre>
+<pre><code>Job=DefaultJob  IterationCount=Default  LaunchCount=Default  
+WarmupCount=Default  
+</code></pre>
+
+<table>
+<thead><tr><th>Method                  </th><th>Workers</th><th>OpsPerWorker</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>Guid_NewGuid_Parallel</td><td>1</td><td>10000</td><td>3.648 ms</td><td>0.0054 ms</td><td>0.0050 ms</td><td>1.00</td><td>1.41 KB</td><td>1.00</td>
+</tr><tr><td>Snowflake_Parallel_ManyWorkers</td><td>1</td><td>10000</td><td>2.552 ms</td><td>0.0052 ms</td><td>0.0049 ms</td><td>0.70</td><td>1.41 KB</td><td>1.00</td>
+</tr><tr><td>Guid_NewGuid_Parallel</td><td>2</td><td>10000</td><td>3.911 ms</td><td>0.0239 ms</td><td>0.0224 ms</td><td>1.00</td><td>1.62 KB</td><td>1.00</td>
+</tr><tr><td>Snowflake_Parallel_ManyWorkers</td><td>2</td><td>10000</td><td>2.750 ms</td><td>0.0231 ms</td><td>0.0205 ms</td><td>0.70</td><td>1.62 KB</td><td>1.00</td>
+</tr><tr><td>Guid_NewGuid_Parallel</td><td>4</td><td>10000</td><td>4.243 ms</td><td>0.0190 ms</td><td>0.0177 ms</td><td>1.00</td><td>2.04 KB</td><td>1.00</td>
+</tr><tr><td>Snowflake_Parallel_ManyWorkers</td><td>4</td><td>10000</td><td>2.897 ms</td><td>0.0136 ms</td><td>0.0127 ms</td><td>0.68</td><td>2.08 KB</td><td>1.02</td>
+</tr><tr><td>Guid_NewGuid_Parallel</td><td>8</td><td>10000</td><td>8.789 ms</td><td>0.0141 ms</td><td>0.0125 ms</td><td>1.00</td><td>2.95 KB</td><td>1.00</td>
+</tr><tr><td>Snowflake_Parallel_ManyWorkers</td><td>8</td><td>10000</td><td>3.077 ms</td><td>0.0180 ms</td><td>0.0169 ms</td><td>0.35</td><td>3 KB</td><td>1.02</td>
+</tr><tr><td>Guid_NewGuid_Parallel</td><td>16</td><td>10000</td><td>15.532 ms</td><td>0.0923 ms</td><td>0.0864 ms</td><td>1.00</td><td>4.77 KB</td><td>1.00</td>
+</tr><tr><td>Snowflake_Parallel_ManyWorkers</td><td>16</td><td>10000</td><td>3.003 ms</td><td>0.0118 ms</td><td>0.0099 ms</td><td>0.19</td><td>4.74 KB</td><td>0.99</td>
+</tr><tr><td>Guid_NewGuid_Parallel</td><td>32</td><td>10000</td><td>30.840 ms</td><td>0.0832 ms</td><td>0.0738 ms</td><td>1.00</td><td>7.07 KB</td><td>1.00</td>
+</tr><tr><td>Snowflake_Parallel_ManyWorkers</td><td>32</td><td>10000</td><td>3.375 ms</td><td>0.0139 ms</td><td>0.0130 ms</td><td>0.11</td><td>8.37 KB</td><td>1.19</td>
+</tr></tbody></table>
+</body>
+</html>
