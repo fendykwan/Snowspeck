@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>Snowspeck</PackageId>
-        <PackageVersion>1.0.1</PackageVersion>
+        <PackageVersion>1.0.2</PackageVersion>
         <Authors>Tiago Ferreira Alves</Authors>
         <Description>A lightweight, thread-safe, extensible, and decodable Snowflake ID generator for .NET</Description>
         <RepositoryType>git</RepositoryType>

@@ -11,20 +11,20 @@ public class SnowflakeOptions
     /// Default: 1735689600000 = Jan 1, 2025 UTC.  
     /// This reduces the number of bits needed to store the timestamp.  
     /// </summary>
-    public long Epoch { get; init; } = 1735689600000L;
+    public long Epoch { get; set; } = 1735689600000L;
 
     /// <summary>
     /// A unique identifier for the datacenter (0–31 by default in the standard 5-bit scheme).  
     /// Used to distinguish groups of workers across different locations.  
     /// </summary>
-    public short DatacenterId { get; init; }
+    public short DatacenterId { get; set; }
     
     /// <summary>
     /// A unique identifier for the worker (0–31 by default in the standard 5-bit scheme).  
     /// Represents the individual process/machine inside a datacenter.  
     /// Must be unique per datacenter.  
     /// </summary>
-    public short WorkerId { get; init; }
+    public short WorkerId { get; set; }
     
     /// <summary>
     /// Max tolerated backward clock skew in milliseconds.  
@@ -32,5 +32,5 @@ public class SnowflakeOptions
     /// If it exceeds this amount, we throw.  
     /// Default: 10 ms.
     /// </summary>
-    public int MaxClockSkewMs { get; init; } = 10;
+    public int MaxClockSkewMs { get; set; } = 10;
 }
