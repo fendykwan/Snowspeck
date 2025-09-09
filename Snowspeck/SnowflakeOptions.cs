@@ -33,4 +33,28 @@ public class SnowflakeOptions
     /// Default: 10 ms.
     /// </summary>
     public int MaxClockSkewMs { get; set; } = 10;
+
+    /// <summary>
+    /// Number of bits reserved for the sequence (per millisecond counter).  
+    /// Default: 12 (max 4096 IDs per ms, per worker).  
+    /// </summary>
+    public int SequenceBits { get; set; } = 12;
+
+    /// <summary>
+    /// Number of bits reserved for the worker ID.  
+    /// Default: 5 (max 32 workers per datacenter).  
+    /// </summary>
+    public int WorkerBits { get; set; } = 5;
+
+    /// <summary>
+    /// Number of bits reserved for the datacenter ID.  
+    /// Default: 5 (max 32 datacenters).  
+    /// </summary>
+    public int DatacenterBits { get; set; } = 5;
+
+    /// <summary>
+    /// Number of bits reserved for the timestamp offset.  
+    /// Default: 41 (enough for ~69 years from the chosen epoch).  
+    /// </summary>
+    public int TimestampBits { get; set; } = 41;
 }

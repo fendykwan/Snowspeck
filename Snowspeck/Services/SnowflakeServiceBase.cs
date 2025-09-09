@@ -21,18 +21,20 @@ public abstract class SnowflakeServiceBase<TId> : ISnowflakeGenerator<TId>
     private readonly short _workerId;
     private readonly int _maxClockSkewMs;
 
-    // Bit layout: [41-bit timestamp offset][5-bit DC][5-bit worker][12-bit seq]
-    protected const int SequenceBits = 12;
-    protected const int WorkerBits = 5;
-    protected const int DatacenterBits = 5;
+    // Configurable Bits
+    protected readonly int SequenceBits;
+    protected readonly int WorkerBits;
+    protected readonly int DatacenterBits;
+    protected readonly int TimestampBits;
 
-    protected const long SequenceMask = (1L << SequenceBits) - 1;
-    protected const int WorkerShift = SequenceBits;
-    protected const int DcShift = SequenceBits + WorkerBits;
-    protected const int TsShift = SequenceBits + WorkerBits + DatacenterBits;
+    // Derived values
+    protected long SequenceMask;
+    protected int WorkerShift;
+    protected int DcShift;
+    protected int TsShift;
 
-    private const long MaxWorkerId = (1L << WorkerBits) - 1;
-    private const long MaxDcId = (1L << DatacenterBits) - 1;
+    private long MaxWorkerId;
+    private long MaxDcId;
 
     protected SnowflakeServiceBase(SnowflakeOptions options)
     {
@@ -42,6 +44,13 @@ public abstract class SnowflakeServiceBase<TId> : ISnowflakeGenerator<TId>
         _datacenterId = options.DatacenterId;
         _workerId = options.WorkerId;
         _maxClockSkewMs = options.MaxClockSkewMs;
+
+        SequenceBits = options.SequenceBits;
+        WorkerBits = options.WorkerBits;
+        DatacenterBits = options.DatacenterBits;
+        TimestampBits = options.TimestampBits;
+
+        CalculateLayout();
 
         if (_datacenterId < 0 || _datacenterId > MaxDcId)
             throw new ArgumentOutOfRangeException(
@@ -132,5 +141,16 @@ public abstract class SnowflakeServiceBase<TId> : ISnowflakeGenerator<TId>
         if (drift <= _maxClockSkewMs) return WaitForNextMillisOffset(lastOffset);
         throw new SnowflakeClockException(
             $"System clock moved backwards by {drift} ms (max tolerated {_maxClockSkewMs} ms).");
+    }
+
+    protected virtual void CalculateLayout()
+    {
+        SequenceMask = (1L << SequenceBits) - 1;
+        WorkerShift = SequenceBits;
+        DcShift = SequenceBits + WorkerBits;
+        TsShift = SequenceBits + WorkerBits + DatacenterBits;
+
+        MaxWorkerId = (1L << WorkerBits) - 1;
+        MaxDcId = (1L << DatacenterBits) - 1;
     }
 }
